@@ -173,6 +173,12 @@ Then deploy:
 amplify publish
 ```
 
+## Known issues
+If your app does not refresh after pushing the changes, then use **-c** flag to invalidate CloudFront cache:
+```bash
+amplify publish -c
+```
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
