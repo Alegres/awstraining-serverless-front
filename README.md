@@ -1,4 +1,10 @@
 # Getting Started with Create React App
+## Prerequisites
+* Node Package Manager
+* AWS CLI
+* AWS Sandbox account with technical user (non-root)
+  * https://github.com/Alegres/awstraining-basics-hands-on?tab=readme-ov-file#create-non-root-user
+  
 ## Initialization
 Install AWS Amplify:
 
@@ -22,7 +28,7 @@ Attach **AdministratorAccess-Amplify** to that user. Review and confirm user cre
 
 Then, click your new user name and go to **Security Credentials**. Create pair of access keys for the **Command Line Interface (CLI)**.
 
-Save access & secret keys somewhere, so you do not access to them.
+Save access & secret keys somewhere, so you do not loose access to them.
 
 Press Enter in the bash console to continue.
 
