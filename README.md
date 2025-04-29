@@ -63,7 +63,7 @@ amplify add auth
 
 Choose Cognito and create new users group. Call it **AmplifyUsers**.
 
-In order to add authentication, Amplify will create a Cognito User Pool.
+In order to add authentication, Amplify will create a Cognito User Pool, that we will later link to our API Gateway (in the backend module).
 
 Our **amplify-user** does not have the required permissions at first, therefore, please assign **AdministratorAccess** to that user for a moment.
 
@@ -72,7 +72,7 @@ Then, you can run the following command:
 amplify push
 ```
 
-Amplify will create Cognito User pool and link it with our application.
+Amplify will create Cognito User pool and link it with our application. Now you can remove the **AdministratorAccess** from the Cognito user.
 
 **Now, we need to go to AWS console, and copy this pool's ARN, and set it inside our backend's stack.**
 
