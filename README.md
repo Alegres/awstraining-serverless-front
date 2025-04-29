@@ -107,8 +107,10 @@ root.render(
 reportWebVitals();
 ```
 
-## Update main App.js
+## Update main App.js (initial page)
 We will now create a login & registration form and call our API Gateway.
+
+Thaks to Amplify, we do not have to implement the form on our own. Amplify will use its own Login component and automatically connect it with our Cognito User Pool.
 
 Go to ```src/App.js``` and implement the following code:
 ```javascript
