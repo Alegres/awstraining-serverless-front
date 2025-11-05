@@ -135,13 +135,11 @@ function App({ signOut, user }) {
       });
 
       const data = await response.json();
-      setRecommendations(data);
 
       console.log("Data")
       console.log(data)
     } catch (error) {
       console.error("Failed to fetch recommendations:", error);
-      setRecommendations([]); // Ensure recommendations is set to an empty array on error
     }
   };
 
