@@ -115,7 +115,6 @@ Thaks to Amplify, we do not have to implement the form on our own. Amplify will 
 Go to ```src/App.js``` and implement the following code **(this is a sample front implementation that we will later extend)**:
 ```javascript
 import { withAuthenticator, Button, TextField, Table, TableCell, TableBody, TableRow, TableHead, Alert } from '@aws-amplify/ui-react';
-import ReactMarkdown from "react-markdown";
 import '@aws-amplify/ui-react/styles.css';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import React, { useState } from "react";
