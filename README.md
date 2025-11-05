@@ -112,58 +112,50 @@ We will now create a login & registration form and call our API Gateway.
 
 Thaks to Amplify, we do not have to implement the form on our own. Amplify will use its own Login component and automatically connect it with our Cognito User Pool.
 
-Go to ```src/App.js``` and implement the following code:
+Go to ```src/App.js``` and implement the following code **(this is a sample front implementation that we will later extend)**:
 ```javascript
+import { withAuthenticator, Button, TextField, Table, TableCell, TableBody, TableRow, TableHead, Alert } from '@aws-amplify/ui-react';
+import ReactMarkdown from "react-markdown";
+import '@aws-amplify/ui-react/styles.css';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import React, { useState } from "react";
-import './App.css';
-import Login from "./components/Login"; // Import Login component
 
-const API_GATEWAY_URL = "https://uiqiygztmj.execute-api.eu-central-1.amazonaws.com/prod/hello";
+function App({ signOut, user }) {
+  const TEST_URL = "https://dsm265hrp5.execute-api.eu-central-1.amazonaws.com/prod/items";
 
-const App = () => {
-  const [token, setToken] = useState(null);
-  const [apiResponse, setApiResponse] = useState(null);
 
-  const handleLogin = (authToken) => {
-    setToken(authToken);
-  };
-
-  const callAPI = async () => {
-    if (!token) {
-      alert("Please log in first!");
-      return;
-    }
-
+  const fetchRecommendations = async () => {
     try {
-      const response = await fetch(API_GATEWAY_URL, {
+      const authToken = (await fetchAuthSession()).tokens?.idToken?.toString();
+
+      const response = await fetch(TEST_URL, {
         method: "GET",
         headers: {
-          Authorization: token, // Pass Cognito token
+          Authorization: authToken,
         },
       });
+
       const data = await response.json();
-      setApiResponse(data);
+      setRecommendations(data);
+
+      console.log("Data")
+      console.log(data)
     } catch (error) {
-      console.error("API call failed:", error);
+      console.error("Failed to fetch recommendations:", error);
+      setRecommendations([]); // Ensure recommendations is set to an empty array on error
     }
   };
 
   return (
-    <div>
-      {!token ? (
-        <Login onLogin={handleLogin} />
-      ) : (
-        <div>
-          <h2>Welcome!</h2>
-          <button onClick={callAPI}>Call API</button>
-          {apiResponse && <pre>{JSON.stringify(apiResponse, null, 2)}</pre>}
-        </div>
-      )}
+    <div className="App">
+      <h1>Hello {user.username}</h1>
+      <Button variation="primary" onClick={signOut}>Sign out</Button>
+      <Button variation="primary" onClick={fetchRecommendations}>Load Recommendations</Button>
     </div>
   );
-};
+}
 
-export default App;
+export default withAuthenticator(App);
 ```
 
 Make sure to adjust the **API_GATEWAY_URL** and set it to your API Gateway deployed in the **backend** module.
